@@ -1,0 +1,6 @@
+# ENV VARIABLES
+.env
+
+# PYCACHE
+__pycache__/
+
