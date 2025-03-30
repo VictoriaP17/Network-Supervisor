@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
+    <title>Control Center - Router 1</title>
+</head>
+<body>
+    <header>
+        <h1>Centro de control - Router 1</h1>
+        <nav>
+            <a href="/">Regresar</a>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="device-info">
+            <h2>Información del dispositivo</h2>
+            <table>
+                <tr>
+                    <th>Nombre</th>
+                    <td>Router 1</td>
+                </tr>
+                <tr>
+                    <th>Tipo</th>
+                    <td>Router</td>
+                </tr>
+                <tr>
+                    <th>Dirección IP</th>
+                    <td>192.168.1.1</td>
+                </tr>
+                <tr>
+                    <th>Estado</th>
+                    <td>Activo</td>
+                </tr>
+            </table>
+        </section>
+
+        <section class="commands" id="commands">
+            <h2>Enviar comandos</h2>
+            <form action="" method="POST">
+                <label for="command">Ingresar comando:</label>
+                <textarea id="command" name="command"></textarea>
+                <button type="submit">Enviar comando</button>
+            </form>
+        </section>
+
+        <section class="status" id="status">
+            <h2>Estado</h2>
+            <div class="status-card">
+                <h3>Salud del dispositivo</h3>
+                <p>Estado: <strong>Bien</strong></p>
+                <p>Tiempo encendido: <strong>45 días, 12 horas</strong></p>
+            </div>
+            <div class="status-card">
+                <h3>Conexiones</h3>
+                <p>Conexiones activas: <strong>120</strong></p>
+                <p>Paquetes enviados: <strong>1,200,000</strong></p>
+            </div>
+        </section>
+
+        <section class="logs" id="logs">
+            <h2>Device Logs</h2>
+            <div class="log-entry">
+                <p><strong>2025-03-30 12:30:45</strong> - Device rebooted.</p>
+            </div>
+            <div class="log-entry">
+                <p><strong>2025-03-30 12:45:10</strong> - Network connection established.</p>
+            </div>
+            <div class="log-entry">
+                <p><strong>2025-03-30 13:00:00</strong> - Error: High traffic detected on port 2.</p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
