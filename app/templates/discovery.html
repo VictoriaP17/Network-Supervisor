@@ -23,42 +23,17 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for dispositivo in dispositivos %}
                         <tr>
-                            <td>Router</td>
-                            <td>Router 1</td>
-                            <td>192.168.1.1</td>
-                            <td>Activo</td>
+                            <td>{{ dispositivo.tipo }}</td>
+                            <td>{{ dispositivo.nombre }}</td>
+                            <td>{{ dispositivo.ip }}</td>
+                            <td>{{ dispositivo.estado }}</td>
                             <td>
-                                <a href="{{url_for('main_views.control_center_index', device_id=1)}}">Consola</a>
+                                <a href="{{ url_for('main_views.control_center_index', device_id=dispositivo.id) }}">Consola</a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Router</td>
-                            <td>Router 2</td>
-                            <td>192.168.1.2</td>
-                            <td>Inactivo</td>
-                            <td>
-                                <a href="{{url_for('main_views.control_center_index', device_id=1)}}">Consola</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Switch</td>
-                            <td>Switch 1</td>
-                            <td>192.168.1.3</td>
-                            <td>Activo</td>
-                            <td>
-                                <a href="{{url_for('main_views.control_center_index', device_id=1)}}">Consola</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Switch</td>
-                            <td>Switch 2</td>
-                            <td>192.168.1.4</td>
-                            <td>Activo</td>
-                            <td>
-                                <a href="{{url_for('main_views.control_center_index', device_id=1)}}">Consola</a>
-                            </td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </article>
