@@ -1,6 +1,7 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background: #f5f5fa;
+    font-family: 'Nunito', Arial, sans-serif;
+    /* degradado vertical azul (ejemplo) */
+    background: linear-gradient(to bottom, #1b9bf3, #0d47a1);
     color: #1a202c;
     margin: 0;
     padding: 0;
@@ -8,6 +9,19 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
+
+h1, h2, h3 {
+    font-weight: 600; /* seminegrita */
+}
+
+p, li, button {
+    font-weight: 400; /* normal */
+}
+
+button {
+    font-weight: 700; /* negrita */
+}
+
 
 h1 {
     font-size: 2.5em;
@@ -23,13 +37,16 @@ main {
 }
 
 section {
-    background: #f5f5fa;
+    /* degradado semitransparente */
+    background: rgba(27, 155, 243, 0.2);
+    backdrop-filter: blur(10px);
     border-radius: 15px;
-    box-shadow: inset 4px 4px 8px #d1d5db, inset -4px -4px 8px #ffffff;
+    box-shadow: inset 4px 4px 8px #243753, inset -4px -4px 8px #243753;
     padding: 20px;
     margin: 20px auto;
     max-width: 600px;
 }
+
 
 p {
     font-size: 1.2em;
@@ -41,25 +58,25 @@ button {
     font-size: 1em;
     font-weight: bold;
     color: #1a202c;
-    background: #f5f5fa;
+    background: #1a81e1;
     border: none;
     border-radius: 50px;
     padding: 15px 30px;
-    box-shadow: 4px 4px 8px #d1d5db, -4px -4px 8px #ffffff;
+    box-shadow: 4px 4px 8px #243753, -4px -4px 8px #243753;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 button:hover {
-    box-shadow: inset 4px 4px 8px #d1d5db, inset -4px -4px 8px #ffffff;
+    box-shadow: inset 4px 4px 8px #243753, inset -4px -4px 8px #243753;
 }
 
 footer {
     font-size: 0.9em;
     color: #718096;
-    background: #f5f5fa;
+    background: #243753;
     text-align: center;
-    padding: 10px;
+    padding: 1px;
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
     position: fixed;
     bottom: 0;
@@ -100,3 +117,20 @@ tr:hover {
 tr:last-child td {
     border-bottom: none;
 }
+
+.device-name {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;  
+  }
+  
+  .device-icon {
+    background-color: #fafafa;
+    width: 2rem;            
+    height: 2rem;
+    border-radius: 50%;     
+    object-fit: cover;      
+    border: 2px solid #ffffff; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3); 
+  }
+  
