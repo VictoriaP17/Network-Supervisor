@@ -41,8 +41,11 @@
                             <td>
                               <a href="{{ url_for('main_views.control_center_index', device_id=dispositivo.id) }}">Consola</a>
                             </td>
-                          </tr>
-                          
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="5">No se encontraron dispositivos</td>
+                        </tr>
                         {% endfor %}
                     </tbody>
                 </table>

@@ -22,6 +22,9 @@ def obtener_dispositivos_via_ssh():
         output = stdout.read().decode("utf-8")
         ssh.close()
 
+        # Ver la salida obtenida
+        print("Salida del comando CDP:", output)
+
         # Parsear resultados
         bloques = output.strip().split("Device ID:")
         for bloque in bloques[1:]:
@@ -54,6 +57,7 @@ def home():
 @main_views.route("/discovery", methods=["GET"])
 def discovery_index():
     dispositivos = obtener_dispositivos_via_ssh()
+    print(dispositivos)  # Verificar que los dispositivos están siendo obtenidos correctamente
     return render_template("discovery.html", dispositivos=dispositivos)
 
 
