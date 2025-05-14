@@ -1,46 +1,50 @@
 from flask import Blueprint, render_template
 import paramiko
-import re
 
 main_views = Blueprint("main_views", __name__)
 
 def obtener_dispositivos_via_ssh():
-    host = "192.168.1.1"  # IP del switch central
-    username = "cisco"     # Usuario SSH
-    password = "cisco"     # Contraseña SSH
+    host = "192.168.1.1"  # IP del Router R1 conectado a tu laptop
+    username = "cisco"
+    password = "cisco"
 
     dispositivos = []
 
     try:
-        # Establecer conexión SSH
+        # Conexión SSH
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh.connect(host, username=username, password=password, look_for_keys=False)
 
-        # Ejecutar comando CDP
+        # Ejecutar comando CDP detail
         stdin, stdout, stderr = ssh.exec_command("show cdp neighbors detail")
         output = stdout.read().decode("utf-8")
         ssh.close()
 
-        # Ver la salida obtenida
-        print("Salida del comando CDP:", output)
+        print("Salida CDP detail:\n", output)
 
-        # Parsear resultados
-        bloques = output.strip().split("Device ID:")
-        for bloque in bloques[1:]:
-            nombre = bloque.split("\n")[0].strip()
-            ip_match = re.search(r"IP address: (\d+\.\d+\.\d+\.\d+)", bloque)
-            tipo_match = re.search(r"Platform: (.*?),", bloque)
+        # Procesar bloques de dispositivos
+        bloques = output.strip().split("Device ID: ")[1:]
 
-            ip = ip_match.group(1) if ip_match else "Desconocido"
-            tipo = tipo_match.group(1) if tipo_match else "Desconocido"
+        for bloque in bloques:
+            lineas = bloque.strip().splitlines()
+            nombre = lineas[0].strip()
+
+            ip = "Desconocido"
+            plataforma = "Desconocido"
+
+            for linea in lineas:
+                if "IP address:" in linea:
+                    ip = linea.split("IP address:")[1].strip()
+                elif "Platform:" in linea:
+                    plataforma = linea.split("Platform:")[1].split(",")[0].strip()
 
             dispositivos.append({
-                'tipo': tipo,
                 'nombre': nombre,
                 'ip': ip,
+                'tipo': plataforma,
                 'estado': "Activo",
-                'id': ip.replace(".", "")
+                'id': nombre.replace(".", "")
             })
 
     except Exception as e:
@@ -57,10 +61,16 @@ def home():
 @main_views.route("/discovery", methods=["GET"])
 def discovery_index():
     dispositivos = obtener_dispositivos_via_ssh()
-    print(dispositivos)  # Verificar que los dispositivos están siendo obtenidos correctamente
+    print(dispositivos)
     return render_template("discovery.html", dispositivos=dispositivos)
 
 
 @main_views.route("/control_center/<device_id>", methods=["GET"])
 def control_center_index(device_id):
-    return render_template("device_console.html")
+    dispositivos = obtener_dispositivos_via_ssh()
+    dispositivo = next((d for d in dispositivos if d['id'] == device_id), None)
+
+    if not dispositivo:
+        return "Dispositivo no encontrado", 404
+
+    return render_template("device_console.html", dispositivo=dispositivo)

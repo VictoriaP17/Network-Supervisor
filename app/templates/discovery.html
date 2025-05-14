@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <title>Discovery</title>
 </head>
 <body>
@@ -16,30 +16,30 @@
                     <thead>
                         <tr>
                             <th>Tipo de dispositivo</th>
-                            <th>Nombre de dispositivo</th>
+                            <th>Nombre del dispositivo</th>
                             <th>Dirección IP</th>
                             <th>Estado</th>
-                            <th></th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for dispositivo in dispositivos %}
                         <tr>
-                            <td class="device-name">
+                            <td>
                                 <img
-                                  class="device-icon"
-                                  src="{{ url_for('static', filename='assets/' ~ 
-                                       (dispositivo.tipo == 'switch' ? 'sw.png' : 'rt.png')) }}"
-                                  alt="{{ dispositivo.tipo }}"
+                                    class="device-icon"
+                                    src="{{ url_for('static', filename='assets/' ~ ('sw.png' if 'Switch' in dispositivo.tipo or 'switch' in dispositivo.tipo else 'rt.png')) }}"
+                                    alt="{{ dispositivo.tipo }}"
+                                    width="32"
+                                    height="32"
                                 >
-                                {{ dispositivo.nombre }}
-                              </td>
-                            <td>{{ dispositivo.tipo }}</td>
-                            
+                                <div>{{ dispositivo.tipo }}</div>
+                            </td>
+                            <td>{{ dispositivo.nombre }}</td>
                             <td>{{ dispositivo.ip }}</td>
                             <td>{{ dispositivo.estado }}</td>
                             <td>
-                              <a href="{{ url_for('main_views.control_center_index', device_id=dispositivo.id) }}">Consola</a>
+                                <a href="{{ url_for('main_views.control_center_index', device_id=dispositivo.id) }}">Consola</a>
                             </td>
                         </tr>
                         {% else %}

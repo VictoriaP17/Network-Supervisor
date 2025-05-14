@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/styles.css">
-    <title>Control Center - Router 1</title>
+    <title>Control Center - {{ dispositivo.nombre }}</title>
 </head>
 <body>
     <header>
-        <h1>Centro de control - Router 1</h1>
+        <h1>Centro de control - {{ dispositivo.nombre }}</h1>
         <nav>
             <a href="/">Regresar</a>
         </nav>
@@ -20,19 +20,19 @@
             <table>
                 <tr>
                     <th>Nombre</th>
-                    <td>Router 1</td>
+                    <td>{{ dispositivo.nombre }}</td>
                 </tr>
                 <tr>
                     <th>Tipo</th>
-                    <td>Router</td>
+                    <td>{{ dispositivo.tipo }}</td>
                 </tr>
                 <tr>
                     <th>Dirección IP</th>
-                    <td>192.168.1.1</td>
+                    <td>{{ dispositivo.ip }}</td>
                 </tr>
                 <tr>
                     <th>Estado</th>
-                    <td>Activo</td>
+                    <td>{{ dispositivo.estado }}</td>
                 </tr>
             </table>
         </section>
